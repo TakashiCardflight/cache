@@ -3061,7 +3061,7 @@ function run() {
                         "-C",
                         cachePath.replace(/\\/g, "/")
                     ]
-                    : ["-I", "xz", "-xv", "-f", archivePath, "-C", cachePath];
+                    : ["-xJ", "-f", archivePath, "-C", cachePath];
                 const tarPath = yield io.which("tar", true);
                 core.debug(`Tar Path: ${tarPath}`);
                 yield exec_1.exec(`"${tarPath}"`, args);
