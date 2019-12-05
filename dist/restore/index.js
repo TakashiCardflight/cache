@@ -2535,7 +2535,7 @@ class NtlmCredentialHandler {
             res.readBody().then(() => {
                 // It is critical that we have setImmediate here due to how connection requests are queued.
                 // If setImmediate is removed then the NTLM handshake will not work.
-                // setImmediate allows us to queue a second request on the same connection. If this second 
+                // setImmediate allows us to queue a second request on the same connection. If this second
                 // request is not queued on the connection when the first request finishes then node closes
                 // the connection. NTLM requires both requests to be on the same connection so we need this.
                 setImmediate(function () {
@@ -2903,7 +2903,7 @@ function bytesToUuid(buf, offset) {
   var i = offset || 0;
   var bth = byteToHex;
   // join used to fix memory issue caused by concatenation: https://bugs.chromium.org/p/v8/issues/detail?id=3175#c4
-  return ([bth[buf[i++]], bth[buf[i++]], 
+  return ([bth[buf[i++]], bth[buf[i++]],
 	bth[buf[i++]], bth[buf[i++]], '-',
 	bth[buf[i++]], bth[buf[i++]], '-',
 	bth[buf[i++]], bth[buf[i++]], '-',
@@ -3054,14 +3054,14 @@ function run() {
                 const IS_WINDOWS = process.platform === "win32";
                 const args = IS_WINDOWS
                     ? [
-                        "-xz",
+                        "-xj",
                         "--force-local",
                         "-f",
                         archivePath.replace(/\\/g, "/"),
                         "-C",
                         cachePath.replace(/\\/g, "/")
                     ]
-                    : ["-xz", "-f", archivePath, "-C", cachePath];
+                    : ["-xj", "-f", archivePath, "-C", cachePath];
                 const tarPath = yield io.which("tar", true);
                 core.debug(`Tar Path: ${tarPath}`);
                 yield exec_1.exec(`"${tarPath}"`, args);
@@ -3238,7 +3238,7 @@ class HttpClient {
             if (this._certConfig) {
                 // If using cert, need fs
                 fs = __webpack_require__(747);
-                // cache the cert content into memory, so we don't have to read it from disk every time 
+                // cache the cert content into memory, so we don't have to read it from disk every time
                 if (this._certConfig.caFile && fs.existsSync(this._certConfig.caFile)) {
                     this._ca = fs.readFileSync(this._certConfig.caFile, 'utf8');
                 }
