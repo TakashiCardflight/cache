@@ -51,7 +51,7 @@ async function run(): Promise<void> {
         const IS_WINDOWS = process.platform === "win32";
         const args = IS_WINDOWS
             ? [
-                  "-cz",
+                  "-cj",
                   "--force-local",
                   "-f",
                   archivePath.replace(/\\/g, "/"),
@@ -59,7 +59,7 @@ async function run(): Promise<void> {
                   cachePath.replace(/\\/g, "/"),
                   "."
               ]
-            : ["-cz", "-f", archivePath, "-C", cachePath, "."];
+            : ["-cj", "-f", archivePath, "-C", cachePath, "."];
 
         const tarPath = await io.which("tar", true);
         core.debug(`Tar Path: ${tarPath}`);
