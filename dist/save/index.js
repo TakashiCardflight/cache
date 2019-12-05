@@ -2922,7 +2922,7 @@ function run() {
                     cachePath.replace(/\\/g, "/"),
                     "."
                 ]
-                : ["-cJ", "-f", archivePath, "-C", cachePath, "."];
+                : ["--use-compress-program=\"zstd --ultra -T0 -22 --long=31\"", "-f", archivePath, "-C", cachePath, "."];
             const tarPath = yield io.which("tar", true);
             core.debug(`Tar Path: ${tarPath}`);
             yield exec_1.exec(`"${tarPath}"`, args);
