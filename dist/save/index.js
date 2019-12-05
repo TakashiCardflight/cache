@@ -2914,7 +2914,7 @@ function run() {
             const IS_WINDOWS = process.platform === "win32";
             const args = IS_WINDOWS
                 ? [
-                    "-cj",
+                    "-cz",
                     "--force-local",
                     "-f",
                     archivePath.replace(/\\/g, "/"),
@@ -2922,7 +2922,7 @@ function run() {
                     cachePath.replace(/\\/g, "/"),
                     "."
                 ]
-                : ["-cj", "-f", archivePath, "-C", cachePath, "."];
+                : ["--use-compress-program=\"zstd -T0 -19 --long=31 --no-progress\"", "-cz", "-f", archivePath, "-C", cachePath, "."];
             const tarPath = yield io.which("tar", true);
             core.debug(`Tar Path: ${tarPath}`);
             yield exec_1.exec(`"${tarPath}"`, args);

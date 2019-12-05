@@ -3054,14 +3054,14 @@ function run() {
                 const IS_WINDOWS = process.platform === "win32";
                 const args = IS_WINDOWS
                     ? [
-                        "-xj",
+                        "-xz",
                         "--force-local",
                         "-f",
                         archivePath.replace(/\\/g, "/"),
                         "-C",
                         cachePath.replace(/\\/g, "/")
                     ]
-                    : ["-xj", "-f", archivePath, "-C", cachePath];
+                    : ["--use-compress-program=\"zstd -T0 -19 --long=31 --no-progress -v -d\"", "-xz", "-f", archivePath, "-C", cachePath];
                 const tarPath = yield io.which("tar", true);
                 core.debug(`Tar Path: ${tarPath}`);
                 yield exec_1.exec(`"${tarPath}"`, args);
